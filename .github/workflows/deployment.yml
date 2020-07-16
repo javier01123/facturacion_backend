@@ -1,0 +1,38 @@
+name: Deployment
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2 
+    - name: login
+      uses: actions/heroku@master
+      env: 
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+         args: container:login       
+    - name: build container
+      run:
+        docker build -f "Facturacion.API/Dockerfile" -t registry.heroku.com/facturacion-backend-dev/web  .  
+    - name: docker login
+      env: 
+       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run:
+        docker login -u=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - name: push container
+      run:
+        docker push registry.heroku.com/facturacion-backend-dev/web
+    - name: release
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:release -a facturacion-backend-dev web
