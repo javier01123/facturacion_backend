@@ -40,6 +40,8 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.CrearCfdi
                     folio
                     );
 
+                cfdi.AsignarTasaIva(request.TasaIva);
+
                 if (request.Partidas != null)
                     foreach (var partida in request.Partidas)
                         cfdi.AgregarPartida(partida.Id, partida.Cantidad, partida.ValorUnitario, partida.Descripcion);

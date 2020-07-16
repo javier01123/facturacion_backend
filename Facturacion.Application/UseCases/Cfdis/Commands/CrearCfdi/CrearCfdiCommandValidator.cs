@@ -10,9 +10,11 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.CrearCfdi
     {
         public CrearCfdiCommandValidator()
         {
-            this.RuleFor(x => x.FechaEmision).NotNull().WithMessage("La Fecha de Emision es obligatoria");
-            this.RuleFor(x => x.Id).GuidNotEmpty().WithMessage("El Id es obligatorio");
-            this.RuleFor(x => x.Serie).NotEmpty().WithMessage("La Serie es obligatoria");
+            RuleFor(x => x.FechaEmision).NotNull().WithMessage("La Fecha de Emision es obligatoria");
+            RuleFor(x => x.Id).GuidNotEmpty();
+            RuleFor(x => x.ClienteId).GuidNotEmpty();
+            RuleFor(x => x.SucursalId).GuidNotEmpty();
+            RuleFor(x => x.Serie).NotEmpty().WithMessage("La Serie es obligatoria");
         }
     }
 }

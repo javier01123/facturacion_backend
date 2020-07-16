@@ -31,6 +31,7 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.ActualizarCfdi
                 cfdi.CambiarCliente(request.ClienteId);
                 cfdi.CambiarFechaEmision(request.FechaEmision);
                 cfdi.CambiarMetodoDePago(request.MetodoDePago);
+                cfdi.AsignarTasaIva(request.TasaIva);
             
                 cfdi.EliminarPartidas();
 

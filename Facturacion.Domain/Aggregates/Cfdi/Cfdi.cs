@@ -16,12 +16,16 @@ namespace Facturacion.Domain.Aggregates
         private Guid _clienteId;
 
         private DateTime _fechaEmision;
-        private decimal _total;
+
 
         private List<Partida> _partidas;
 
         private int _folio;
         private string _serie;
+        private int _tasaIva;
+        private decimal _subtotal;
+        private decimal _iva;
+        private decimal _total;
 
         private MetodoDePago _metodoDePago;
 
@@ -29,9 +33,11 @@ namespace Facturacion.Domain.Aggregates
         public Guid Id { get => _id; }
         public Guid SucursalId { get => _sucursalId; }
         public int Folio { get => _folio; }
+        public decimal Subtotal { get => _subtotal; }
+        public decimal Iva { get => _iva; }
+        public decimal Total { get => _total; }
         public ReadOnlyCollection<Partida> Partidas { get => _partidas.AsReadOnly(); }
 
-        public decimal Total { get => _total; }
         #endregion
 
         private Cfdi()
@@ -85,7 +91,7 @@ namespace Facturacion.Domain.Aggregates
 
             partida = Partida.CrearPartida(id, cantidad, valorUnitario, descripcion);
             _partidas.Add(partida);
-            RecalcularTotal();
+            Recalcular();
         }
 
         public void ModificarPartida(Guid id, decimal cantidad, decimal valorUnitario, string descripcion)
@@ -96,7 +102,7 @@ namespace Facturacion.Domain.Aggregates
                 throw new PartidaIdNotFound(id.ToString());
 
             partida.ModificarDatos(cantidad, valorUnitario, descripcion);
-            RecalcularTotal();
+            Recalcular();
         }
 
         public void EliminarPartida(Guid id)
@@ -107,13 +113,21 @@ namespace Facturacion.Domain.Aggregates
                 throw new PartidaIdNotFound(id.ToString());
 
             _partidas.Remove(partida);
-            RecalcularTotal();
+            Recalcular();
         }
 
-        private void RecalcularTotal()
+        public void AsignarTasaIva(int tasaIva)
         {
-            var totalSinRedondeo = _partidas.Sum(m => m.Importe);
-            _total = Math.Round(totalSinRedondeo, 2);
+            Guard.ValueCannotBeNegative(tasaIva, nameof(tasaIva));
+            _tasaIva = tasaIva;
+            Recalcular();
+        }
+
+        private void Recalcular()
+        {
+            _subtotal = Math.Round(_partidas.Sum(m => m.Importe), 2);
+            _iva = Math.Round(_subtotal * (_tasaIva / 100m), 2);
+            _total = _subtotal + _iva;
         }
 
         public void EliminarPartidas()

@@ -16,6 +16,9 @@ namespace Facturacion.Application.UseCases.Cfdis.Queries.GetCfdi
         public string RfcCliente { get; set; }
         public string RazonSocialCliente { get; set; }
         public string Sucursal { get; set; }
+        public int TasaIva { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal Iva { get; set; }
         public decimal Total { get; set; }
 
 

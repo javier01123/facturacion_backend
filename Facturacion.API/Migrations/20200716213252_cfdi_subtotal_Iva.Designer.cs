@@ -3,15 +3,17 @@ using System;
 using Facturacion.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Facturacion.API.Migrations
 {
     [DbContext(typeof(FacturacionContext))]
-    partial class FacturacionContextModelSnapshot : ModelSnapshot
+    [Migration("20200716213252_cfdi_subtotal_Iva")]
+    partial class cfdi_subtotal_Iva
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,10 +58,6 @@ namespace Facturacion.API.Migrations
                     b.Property<decimal>("_subtotal")
                         .HasColumnName("Subtotal")
                         .HasColumnType("numeric");
-
-                    b.Property<int>("_tasaIva")
-                        .HasColumnName("TasaIva")
-                        .HasColumnType("integer");
 
                     b.Property<decimal>("_total")
                         .HasColumnName("Total")

@@ -17,21 +17,24 @@ namespace Facturacion.Infrastructure.Persistence.EntitiesConfiguration
             builder.HasKey(m => m.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
             builder.Property<Guid>("_clienteId").HasColumnName("ClienteId").ValueGeneratedNever();
-            builder.Property(b=>b.SucursalId).HasColumnName("SucursalId").ValueGeneratedNever();
+            builder.Property(b => b.SucursalId).HasColumnName("SucursalId").ValueGeneratedNever();
 
             builder.Property<string>("_serie").HasColumnName("Serie").HasMaxLength(10);
             //builder.Property<int>("_folio").HasColumnName("Folio");
-            builder.Property(m=>m.Folio).HasColumnName("Folio");
+            builder.Property(m => m.Folio).HasColumnName("Folio");
 
             builder.Property<DateTime>("_fechaEmision").HasColumnName("FechaEmision");
 
             builder.Property<MetodoDePago>("_metodoDePago").HasColumnName("MetodoDePago");
 
-            builder.Property<decimal>("_total").HasColumnName("Total");
-           
+            builder.Property<int>("_tasaIva").HasColumnName("TasaIva");
+            builder.Property(b=>b.Subtotal).HasColumnName("Subtotal");
+            builder.Property(b=>b.Iva).HasColumnName("Iva");
+            builder.Property(b=>b.Total).HasColumnName("Total");
+
             builder.OwnsMany<Partida>("_partidas", b =>
             {
-                b.ToTable("Partida");                
+                b.ToTable("Partida");
                 b.HasKey(m => m.Id);
                 b.Property(b => b.Id).ValueGeneratedNever();
                 b.Property<decimal>("_cantidad").HasColumnName("Cantidad");

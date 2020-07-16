@@ -14,5 +14,6 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.CrearCfdi
         public Guid SucursalId { get; set; }
         public string Serie { get; set; }
         public DateTime FechaEmision { get; set; }
+        public int TasaIva { get; set; }
     }
 }
