@@ -14,7 +14,6 @@ namespace API.IntegrationTests.Controllers.Cfdi
     [TestFixture]
     public class CrearCfdi : ControllerTestBase
     {
-
         [Test]
         public async Task CrearCfdi_DatosValidos_DebeRegresarSuccess()
         {
@@ -22,7 +21,9 @@ namespace API.IntegrationTests.Controllers.Cfdi
             {
                 Id = Guid.NewGuid(),
                 ClienteId = Guid.NewGuid(),
-                FechaEmision = DateTime.Now
+                SucursalId = Guid.NewGuid(),
+                FechaEmision = DateTime.Now,
+                Serie = "F"                
             };
 
             var content = Utilities.GetRequestContent(command);

@@ -54,8 +54,10 @@ namespace Facturacion.Application.UseCases.Cfdis.Queries.GetCfdi
 
             using (var multi = connection.QueryMultiple(sqlCfdi + sqlPartidas, new { CfdiId = request.Id }))
             {
-                cfdi = multi.Read<CfdiVm>().First();
-                cfdi.Partidas = multi.Read<PartidaVm>().ToList();
+                cfdi = multi.Read<CfdiVm>().FirstOrDefault();
+
+                if (cfdi != null)
+                    cfdi.Partidas = multi.Read<PartidaVm>().ToList();
             }
 
             if (cfdi == null)

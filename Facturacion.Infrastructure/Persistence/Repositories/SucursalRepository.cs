@@ -36,7 +36,8 @@ namespace Facturacion.Infrastructure.Persistence.Repositories
 
         public async Task<int> GetSiguienteFolioDisponible(Guid sucursalId)
         {
-            var ultimoFolioUsuado = await _facturacionContext.Cfdi.Where(m=>m.SucursalId==sucursalId).MaxAsync(m => m.Folio);
+ 
+            var ultimoFolioUsuado = await _facturacionContext.Cfdi.Where(m=>m.SucursalId==sucursalId).MaxAsync(m => (int?)m.Folio) ?? 0;
             return ultimoFolioUsuado+1;
         }
     }
