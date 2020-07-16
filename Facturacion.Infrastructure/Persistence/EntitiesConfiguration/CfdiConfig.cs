@@ -1,11 +1,8 @@
 ﻿using Facturacion.Domain.Aggregates;
 using Facturacion.Domain.Enums;
-using Facturacion.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Facturacion.Infrastructure.Persistence.EntitiesConfiguration
 {
@@ -28,9 +25,9 @@ namespace Facturacion.Infrastructure.Persistence.EntitiesConfiguration
             builder.Property<MetodoDePago>("_metodoDePago").HasColumnName("MetodoDePago");
 
             builder.Property<int>("_tasaIva").HasColumnName("TasaIva");
-            builder.Property(b=>b.Subtotal).HasColumnName("Subtotal");
-            builder.Property(b=>b.Iva).HasColumnName("Iva");
-            builder.Property(b=>b.Total).HasColumnName("Total");
+            builder.Property(b => b.Subtotal).HasColumnName("Subtotal");
+            builder.Property(b => b.Iva).HasColumnName("Iva");
+            builder.Property(b => b.Total).HasColumnName("Total");
 
             builder.OwnsMany<Partida>("_partidas", b =>
             {
