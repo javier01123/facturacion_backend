@@ -9,7 +9,8 @@ a trabajar con ella y con Domain Driven Design, resolver las dudas mas comunes a
 
 ## Alcance
 
-Escogí implementar un software de facturación electrónica mexicano simplemente porque es en lo que tengo mas experiencia y puedo implementar casos de uso de la vida real, con el tiempo se implementarán mas funcionalidades, pero el principal objetivo de este proyecto no es un software de facturación que cumpla la legislación mexicana para facturación, sino una referencia técnica sobre arcquitectura.
+Escogí implementar un back-end de facturación electrónica mexicano simplemente porque es en lo que tengo mas experiencia y puedo implementar casos de uso de la vida real, con el tiempo se implementarán mas funcionalidades, pero el principal objetivo de este proyecto no es un software de facturación que cumpla la legislación mexicana para facturación, sino una referencia técnica sobre arquitectura.
+El código debe mantenerse multiplataforma (compatible Linux y Windows)
 
 ## Estatus del proyecto
 
@@ -18,7 +19,14 @@ Este proyecto se encuentra en desarrollo
 ## Front-end implementado con React Js
 
 Repositorio [Github](https://github.com/javier01123/facturacion_frontend)
-Hospedado aqui [site]((https://facturacion-frontend-dev.herokuapp.com/)
+Hospedado aqui [site](https://facturacion-frontend-dev.herokuapp.com/)
+
+## Onion Architecture
+Onion Architecture se basa en el principio de inversión de control. 
+Onion Architecture se compone de múltiples capas concéntricas que se interconectan entre sí hacia el núcleo que representa el dominio.
+La arquitectura no depende de la capa de datos como en las arquitecturas clásicas de varios niveles, sino de los modelos de dominio reales.
+
+![Capas en una Onion Architecture](https://raw.githubusercontent.com/javier01123/facturacion_backend/master/docs/onion_architecture.png)
 
 ## Diagrama Entidad-Relación
 
