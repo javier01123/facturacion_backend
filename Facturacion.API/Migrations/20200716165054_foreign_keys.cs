@@ -23,12 +23,33 @@ namespace Facturacion.API.Migrations
                  principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade
                 );
+
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Cfdi_Cliente_ClienteId",
+                table: "Cfdi",
+                column: "ClienteId",
+                principalTable: "Cliente",
+                 principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade
+                );
+
+            migrationBuilder.AddForeignKey(
+              name: "FK_Cfdi_Sucursal_SucursalId",
+              table: "Cfdi",
+              column: "SucursalId",
+              principalTable: "Sucursal",
+               principalColumn: "Id",
+              onDelete: ReferentialAction.Cascade
+              );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey("FK_Sucursal_Empresa_EmpresaId", "Sucursal");
-            migrationBuilder.DropForeignKey("FK_Cliente_Empresa_EmpresaId", "Cliente");          
+            migrationBuilder.DropForeignKey("FK_Cliente_Empresa_EmpresaId", "Cliente");
+            migrationBuilder.DropForeignKey("FK_Cfdi_Cliente_ClienteId", "Cfdi");
+            migrationBuilder.DropForeignKey("FK_Cfdi_Sucursal_SucursalId", "Cfdi");
         }
     }
 }

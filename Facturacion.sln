@@ -21,6 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.IntegrationTests", "API
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{331B8E36-FE65-4061-8F2F-D1C47C640330}"
 	ProjectSection(SolutionItems) = preProject
+		docs\FacturacionDb_EDR.png = docs\FacturacionDb_EDR.png
 		README.md = README.md
 	EndProjectSection
 EndProject

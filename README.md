@@ -26,6 +26,7 @@ Hospedado aqui [site]((https://facturacion-frontend-dev.herokuapp.com/)
 * Domain driven design de Scott Millet [link](https://www.oreilly.com/library/view/patterns-principles-and/9781118714706/)
 * Clean Architecture [link](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 * CQRS [link](https://martinfowler.com/bliki/CQRS.html)
+* Hashing [link](https://docs.microsoft.com/en-us/dotnet/api/system.string.compareto?view=netcore-3.1)
 
 ## Herramientas
 

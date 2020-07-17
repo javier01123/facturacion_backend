@@ -87,7 +87,7 @@ namespace Facturacion.API
             if (env.IsProduction())
             {
                 origin = "https://facturacion-frontend-dev.herokuapp.com";
-                (context as FacturacionContext).Database.Migrate();
+               context.Database.Migrate();
             }
 
             app.UseCors(options => options
