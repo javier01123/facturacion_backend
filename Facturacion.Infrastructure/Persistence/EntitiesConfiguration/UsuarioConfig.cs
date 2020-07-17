@@ -15,7 +15,7 @@ namespace Facturacion.Infrastructure.Persistence.EntitiesConfiguration
             builder.ToTable("Usuario");
             builder.HasKey("_id");            
             builder.Property("_id").HasColumnName("Id").ValueGeneratedNever();
-            builder.Property("_password").HasMaxLength(20).HasColumnName("Password");
+            builder.Property("_password").HasMaxLength(100).HasColumnName("Password");
 
             builder.OwnsOne<Email>("_email", b =>
             {

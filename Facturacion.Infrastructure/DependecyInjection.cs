@@ -8,6 +8,8 @@ using Facturacion.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Facturacion.Application.Common.Contracts.Repositories;
+using Facturacion.Application.Common.Contracts.Hashing;
+using Facturacion.Infrastructure.Hashing;
 
 namespace Facturacion.Infrastructure
 {
@@ -29,6 +31,8 @@ namespace Facturacion.Infrastructure
             services.AddTransient<ISucursalRepository, SucursalRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<ICfdiRepository, CfdiRepository>();
+
+            services.AddTransient<IPasswordHasher, PasswordHasher>(); ;
             
 
             return services;

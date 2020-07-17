@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Facturacion.Application.Common.Contracts;
+using Facturacion.Application.Common.Contracts.Hashing;
 using Facturacion.Application.Common.Exceptions;
 using Facturacion.Application.Common.Extensions;
 using FluentValidation.TestHelper;
@@ -15,9 +16,11 @@ namespace Facturacion.Application.UseCases.Usuarios.Queries.ValidarCredenciales
     public class ValidarCredencialesCommandHandler : IRequestHandler<ValidarCredencialesCommand, ValidarCredencialesResult>
     {
         private ISqlConnectionFactory _sqlConnectionFactory;
-        public ValidarCredencialesCommandHandler(ISqlConnectionFactory sqlConnectionFactory)
+        private IPasswordHasher _passwordHasher;
+        public ValidarCredencialesCommandHandler(ISqlConnectionFactory sqlConnectionFactory, IPasswordHasher passwordHasher)
         {
             _sqlConnectionFactory = sqlConnectionFactory ?? throw new ArgumentNullException(nameof(sqlConnectionFactory));
+            _passwordHasher = passwordHasher ?? throw new ArgumentNullException(nameof(passwordHasher));
         }
 
         public async Task<ValidarCredencialesResult> Handle(ValidarCredencialesCommand request, CancellationToken cancellationToken)
@@ -26,23 +29,26 @@ namespace Facturacion.Application.UseCases.Usuarios.Queries.ValidarCredenciales
 
             var sql = @"
                         SELECT
-                        u.[Id] as UsuarioId,
-                        u.[Email]
+                        u.[Id] as [UsuarioId],                      
+                        u.[Email],
+                        u.[Password]
                         FROM [Usuario] as u
                         WHERE u.[Email] = @Email 
-                        AND u.[Password] = @Password
                         LIMIT 1;
                         ".ReplaceBracketsWithQuotes();
 
-            var result = await connection.QuerySingleOrDefaultAsync<ValidarCredencialesResult>(sql, new { Email = request.Email, Password = request.Password });
+            var usuario = await connection.QuerySingleOrDefaultAsync(sql, new { Email = request.Email });
 
-            if (result == null)
+            if (usuario == null)
                 throw new LoginException("usuario o contraseña invalida");
 
-            result = new ValidarCredencialesResult()
+            if (!_passwordHasher.VerifyPassword(request.Password, usuario.Password))
+                throw new LoginException("usuario o contraseña invalida");
+
+            var result = new ValidarCredencialesResult()
             {
-                Email = request.Email,
-                UsuarioId = result.UsuarioId,
+                Email = usuario.Email,
+                UsuarioId = usuario.UsuarioId,
             };
 
             return result;

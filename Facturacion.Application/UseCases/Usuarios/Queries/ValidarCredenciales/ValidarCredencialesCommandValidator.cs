@@ -9,7 +9,8 @@ namespace Facturacion.Application.UseCases.Usuarios.Queries.ValidarCredenciales
     {
         public ValidarCredencialesCommandValidator()
         {
-
+            RuleFor(x => x.Email).EmailAddress();
+            RuleFor(x => x.Password).NotEmpty();
         }
     }
 }

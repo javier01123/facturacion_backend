@@ -10,7 +10,7 @@ namespace API.IntegrationTests.Common
     {
         public static void InitializeDbForTests(FacturacionContext context)
         {
-            var usuarioDefault = Usuario.Create(Guid.NewGuid(), "admin@noserver.com", "mypass");
+            var usuarioDefault = Usuario.Create(Guid.NewGuid(), "admin@noserver.com", "dm1/Vgoz/Ju1N4ROyNwWdw==:rcC2UqqbuOImD6HFOJPOWrbd+0NcPYWdpctMve9UX/Y=");
             context.Usuario.Add(usuarioDefault);
 
             var empresaId = Guid.Parse("86904cc6-7838-4beb-85d8-9dad30148b11");

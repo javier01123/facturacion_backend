@@ -15,6 +15,11 @@ Escogí implementar un software de facturación electrónica mexicano simplement
 
 Este proyecto se encuentra en desarrollo
 
+## Front-end implementado con React Js
+
+Repositorio [Github](https://github.com/javier01123/facturacion_frontend)
+Hospedado aqui [site]((https://facturacion-frontend-dev.herokuapp.com/)
+
 ## Recursos
 
 * Introducción Domain Driven Design [link](https://martinfowler.com/bliki/DomainDrivenDesign.html)
