@@ -20,6 +20,10 @@ Este proyecto se encuentra en desarrollo
 Repositorio [Github](https://github.com/javier01123/facturacion_frontend)
 Hospedado aqui [site]((https://facturacion-frontend-dev.herokuapp.com/)
 
+## Diagrama Entidad-Relación
+
+![EDR Diagram](https://raw.githubusercontent.com/javier01123/facturacion_backend/master/docs/FacturacionDb_EDR.png)
+
 ## Recursos
 
 * Introducción Domain Driven Design [link](https://martinfowler.com/bliki/DomainDrivenDesign.html)
