@@ -39,6 +39,7 @@ namespace Facturacion.API.Controllers
             return Ok();
         }
 
+        [HttpGet]
         [Route("{Id}")]
         public async Task<ActionResult<Application.UseCases.Empresas.GetEmpresa.EmpresaDto>> Get([FromRoute] GetEmpresaCommand command)
         {

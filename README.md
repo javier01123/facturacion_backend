@@ -16,6 +16,10 @@ a trabajar con ella y con Domain Driven Design, resolver las dudas mas comunes a
 
 Este proyecto se encuentra en desarrollo
 
+## Documentación del API utilizando Swagger
+
+Lo puedes consultar en el hosting para demostración [link](https://facturacion-backend-dev.herokuapp.com/)
+
 ## Front-end implementado con React Js
 
 Repositorio [Git](https://github.com/javier01123/facturacion_frontend)

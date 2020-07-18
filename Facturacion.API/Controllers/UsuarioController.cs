@@ -22,27 +22,14 @@ namespace Facturacion.API.Controllers
     [Route("api/usuarios")]
     public class UsuarioController : BaseController
     {
-        //private readonly IOptions<AppSettings> config;
-
-        //public UsuarioController(IOptions<AppSettings> config)
-        //{
-        //    this.config = config;
-        //} 
 
         [AllowAnonymous]
         [Route("authenticate")]
         [HttpPost()]
         public async Task<IActionResult> Authenticate([FromBody] ValidarCredencialesCommand command)
         {
-            //ValidarCredencialesResult resultado;
 
-            ////try
-            ////{
-                ValidarCredencialesResult resultado = await Mediator.Send(command);
-
-
-            //if (resultado==null)
-            //    return BadRequest(new { message = "Usuario o password incorrecto" });
+            ValidarCredencialesResult resultado = await Mediator.Send(command);
 
             string token = JwtManager.GenerateToken(command.Email.Trim());
 

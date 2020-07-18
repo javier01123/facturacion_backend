@@ -55,10 +55,12 @@ namespace Facturacion.API
             services.AddControllers();
             services.AddMvc()
             .AddHybridModelBinder();
-
-            //services.AddControllersWithViews(options =>
-            //   options.Filters
-            //   .Add(new ApiExceptionFilter()));
+    
+            services.AddSwaggerGen(options =>
+            {
+                options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                options.CustomSchemaIds(x => x.FullName);
+            });
 
             services.AddAuthentication("Basic")
                .AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>("Basic", null);
@@ -87,8 +89,20 @@ namespace Facturacion.API
             if (env.IsProduction())
             {
                 origin = "https://facturacion-frontend-dev.herokuapp.com";
-               context.Database.Migrate();
+                context.Database.Migrate();
             }
+
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Facturación API");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseCors(options => options
             .AllowAnyMethod()
