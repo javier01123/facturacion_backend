@@ -9,8 +9,8 @@ a trabajar con ella y con Domain Driven Design, resolver las dudas mas comunes a
 
 ## Alcance
 
-Escogí implementar un back-end de facturación electrónica mexicano simplemente porque es en lo que tengo mas experiencia y puedo implementar casos de uso de la vida real, con el tiempo se implementarán mas funcionalidades, pero el principal objetivo de este proyecto no es un software de facturación que cumpla la legislación mexicana para facturación, sino una referencia técnica sobre arquitectura.
-El código debe mantenerse multiplataforma (compatible Linux y Windows)
+* Escogí implementar un back-end de facturación electrónica mexicano simplemente porque es en lo que tengo mas experiencia y puedo implementar casos de uso de la vida real, con el tiempo se implementarán mas funcionalidades, pero el principal objetivo de este proyecto no es un software de facturación que cumpla la legislación mexicana para facturación, sino una referencia técnica sobre arquitectura.
+* El código debe mantenerse multiplataforma (compatible Linux y Windows)
 
 ## Estatus del proyecto
 
@@ -18,8 +18,8 @@ Este proyecto se encuentra en desarrollo
 
 ## Front-end implementado con React Js
 
-Repositorio [Github](https://github.com/javier01123/facturacion_frontend)
-Hospedado aqui [site](https://facturacion-frontend-dev.herokuapp.com/)
+Repositorio [Git](https://github.com/javier01123/facturacion_frontend)
+Hospedado [aquí](https://facturacion-frontend-dev.herokuapp.com/)
 
 ## Onion Architecture
 Onion Architecture se basa en el principio de inversión de control. 
@@ -43,7 +43,7 @@ La arquitectura no depende de la capa de datos como en las arquitecturas clásic
 ## Herramientas
 
 * PostgreSql [link](https://www.postgresql.org/)
-* .NET Core [link](https://dotnet.microsoft.com/download)
+* .NET Core 3.1 [link](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.302-windows-x64-installer)
 * MediatR (bus de comunicación)[link](https://github.com/jbogard/MediatR)
 * Visual Studio 2019 [link](https://visualstudio.microsoft.com/es/vs/community/)
 * Docker [link](https://www.docker.com/)
