@@ -30,14 +30,14 @@ La arquitectura no depende de la capa de datos como en las arquitecturas clásic
 **Facturacion.API (Presentation)**  
 En esta capa se encuentra la implementacion de la Web API y la configuración para el inicio de la aplicación.
 
-**Facturacion.Domain**
+**Facturacion.Domain**  
 Es la capa central de la aplicación, aquí se debe implementar toda la lógica de negocio. Debe ser ignorante de otras capas y sobre todo de la base de datos.   
 
 **Facturacion.Application**  
 En esta capa se implementan los casos de uso y las transacciones.  
 Se encarga de cordinar las llamadas a los objetos de dominio y llamadas a servicios externos a través de sus interfaces.
 
-**Facturacion.Infrastructure**
+**Facturacion.Infrastructure**  
 En esta capa se deben implementar las dependencias a servicios externos como Web services, bases de datos, servicios de email, etc.,por tanto, esta capa es la que tiene depenencia a las librerias, librando a las otras capas de [complejidad accidental.](https://www.nutshell.com/blog/accidental-complexity-software-design/)
 
 ## Documentación del API utilizando Swagger
@@ -63,7 +63,10 @@ Hospedado [aquí](https://facturacion-frontend-dev.herokuapp.com/)
 
 ### Pruebas de integración (Integration Tests)
 
+* Se utilizan para verificar que el sistema funciona como un todo.
 * Pueden llamar a servicios externos (como bases de datos)
+* Deben probar servicios de los cuales se tiene el control total (Bases de datos). 
+* Servicios externos  no controlados que producen salidas visibles a softwares externos deben ser reemplazados con un Mock. (Smtp servers)
 
 La relación de pruebas unitarias y pruebas de integración  pueden variar en cada proyecto, pero la regla general es probar la mayoria de edge cases posibles con pruebas unitarias. Probar un happy path con con la pruebas de integración y edge cases que no se puedan abarcar con pruebas unitarias.
 
@@ -77,7 +80,7 @@ La relación de pruebas unitarias y pruebas de integración  pueden variar en ca
 
 ## Herramientas
 
-* PostgreSql [link](https://www.postgresql.org/)
+* PostgreSql 12.3 [link](https://www.postgresql.org/)
 * .NET Core 3.1 [link](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.302-windows-x64-installer)
 * MediatR (bus de comunicación)[link](https://github.com/jbogard/MediatR)
 * Visual Studio 2019 [link](https://visualstudio.microsoft.com/es/vs/community/)

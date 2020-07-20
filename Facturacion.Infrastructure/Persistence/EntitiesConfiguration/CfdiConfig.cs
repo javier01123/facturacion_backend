@@ -24,7 +24,7 @@ namespace Facturacion.Infrastructure.Persistence.EntitiesConfiguration
 
             builder.Property<MetodoDePago>("_metodoDePago").HasColumnName("MetodoDePago");
 
-            builder.Property<int>("_tasaIva").HasColumnName("TasaIva");
+            builder.Property<decimal>("_tasaIva").HasColumnName("TasaIva");
             builder.Property(b => b.Subtotal).HasColumnName("Subtotal");
             builder.Property(b => b.Iva).HasColumnName("Iva");
             builder.Property(b => b.Total).HasColumnName("Total");

@@ -3,15 +3,17 @@ using System;
 using Facturacion.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Facturacion.API.Migrations
 {
     [DbContext(typeof(FacturacionContext))]
-    partial class FacturacionContextModelSnapshot : ModelSnapshot
+    [Migration("20200720191054_cfdi_tasaIvaADecimal")]
+    partial class cfdi_tasaIvaADecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
