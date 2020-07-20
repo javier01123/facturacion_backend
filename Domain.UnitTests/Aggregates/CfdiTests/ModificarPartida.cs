@@ -32,7 +32,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             _cfdi = Cfdi.Create(id, clienteId,sucursalId, fechaEmision,serie,folio);
             _cfdi.AgregarPartida(_partidaId, cantidad, valorUnitario, descripcion);
         }
-        //modificar partida
+ 
         [Test]
         public void ModificarPartida_DatosValidos_DebeGenerarElTotalEsperado()
         {
@@ -58,7 +58,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var nuevaDescripcion = "nueva descripción";
 
             //assert
-            Assert.Throws<GenericDomainException>(() => _cfdi.ModificarPartida(_partidaId, nuevaCantidad, nuevoValorUnitario, nuevaDescripcion));
+            Assert.Throws<InvalidParameterException>(() => _cfdi.ModificarPartida(_partidaId, nuevaCantidad, nuevoValorUnitario, nuevaDescripcion));
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var nuevaDescripcion = "nueva descripción";
 
             //assert
-            Assert.Throws<GenericDomainException>(() => _cfdi.ModificarPartida(_partidaId, nuevaCantidad, nuevoValorUnitario, nuevaDescripcion));
+            Assert.Throws<InvalidParameterException>(() => _cfdi.ModificarPartida(_partidaId, nuevaCantidad, nuevoValorUnitario, nuevaDescripcion));
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var nuevaDescripcion = "nueva descripción";
 
             //assert
-            Assert.Throws<GenericDomainException>(() => _cfdi.ModificarPartida(_partidaId, nuevaCantidad, nuevoValorUnitario, nuevaDescripcion));
+            Assert.Throws<InvalidParameterException>(() => _cfdi.ModificarPartida(_partidaId, nuevaCantidad, nuevoValorUnitario, nuevaDescripcion));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Domain.UnitTests.Aggregates.ClienteTests
             var cliente = Cliente.Create(id, empresaId, rfc, razonSocial);
             var nuevaRazonSocial = "";
 
-            Assert.Throws<GenericDomainException>(() => cliente.CambiarRazonSocial(nuevaRazonSocial));
+            Assert.Throws<InvalidParameterException>(() => cliente.CambiarRazonSocial(nuevaRazonSocial));
         }
     }
 }

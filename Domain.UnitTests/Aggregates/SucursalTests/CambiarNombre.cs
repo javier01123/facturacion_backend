@@ -31,7 +31,7 @@ namespace Domain.UnitTests.Aggregates.SucursalTests
             var sucursal = Sucursal.Create(id, empresaId, nombre);
             var nuevoNombre = "";
 
-            Assert.Throws<GenericDomainException>(() =>
+            Assert.Throws<InvalidParameterException>(() =>
             sucursal.CambiarNombre(nuevoNombre));
         }
 

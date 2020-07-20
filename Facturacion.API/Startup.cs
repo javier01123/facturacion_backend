@@ -100,7 +100,7 @@ namespace Facturacion.API
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Facturación API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Facturacion API");
                 c.RoutePrefix = string.Empty;
             });
 

@@ -37,7 +37,7 @@ namespace Domain.UnitTests.Aggregates.EmpresaTests
             var nombreComercial = "nombre demo";
             var rfc = "XAXX010101000";
 
-            Assert.Throws<GenericDomainException>(() => Empresa.Create(id, rfc, razonSocial, nombreComercial));
+            Assert.Throws<InvalidParameterException>(() => Empresa.Create(id, rfc, razonSocial, nombreComercial));
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace Domain.UnitTests.Aggregates.EmpresaTests
             var nombreComercial = "nombre demo";
             var rfc = "XAXX010101000";
 
-            Assert.Throws<GenericDomainException>(() => Empresa.Create(id, rfc, razonSocial, nombreComercial));
+            Assert.Throws<InvalidParameterException>(() => Empresa.Create(id, rfc, razonSocial, nombreComercial));
         }
 
 
@@ -60,7 +60,7 @@ namespace Domain.UnitTests.Aggregates.EmpresaTests
             var nombreComercial = "";
             var rfc = "XAXX010101000";
 
-            Assert.Throws<GenericDomainException>(() => Empresa.Create(id, rfc, razonSocial, nombreComercial));
+            Assert.Throws<InvalidParameterException>(() => Empresa.Create(id, rfc, razonSocial, nombreComercial));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Facturacion.Domain.Aggregates
 
         private int _folio;
         private string _serie;
-        private int _tasaIva;
+        private decimal _tasaIva;
         private decimal _subtotal;
         private decimal _iva;
         private decimal _total;
@@ -116,7 +116,7 @@ namespace Facturacion.Domain.Aggregates
             Recalcular();
         }
 
-        public void AsignarTasaIva(int tasaIva)
+        public void AsignarTasaIva(decimal tasaIva)
         {
             Guard.ValueCannotBeNegative(tasaIva, nameof(tasaIva));
             _tasaIva = tasaIva;

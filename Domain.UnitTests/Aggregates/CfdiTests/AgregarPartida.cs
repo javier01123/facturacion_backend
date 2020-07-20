@@ -26,19 +26,27 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
         }
 
         [Test]
-        public void AgregarPartida_DatosValidos_DebeGenerarElTotalEsperado()
+        public void AgregarPartida_DatosValidos_DebeGenerarCalculosEsperados()
         {
             var partidaId = Guid.NewGuid();
             var cantidad = 23.66m;
             var valorUnitario = 12.55m;
             var descripcion = "despcripción para a partida";
-            var totalEsperado = 296.93m;
+            var tasaIva = 16;
+
+            var subtotalEsperado = 296.93m;
+            var ivaEsperado =47.51m ;
+            var totalEsperado =344.44m;          
 
             //act
             _cfdi.AgregarPartida(partidaId, cantidad, valorUnitario, descripcion);
+            _cfdi.AsignarTasaIva(tasaIva);
 
             //assert
+            Assert.AreEqual(subtotalEsperado, _cfdi.Subtotal);
+            Assert.AreEqual(ivaEsperado, _cfdi.Iva);
             Assert.AreEqual(totalEsperado, _cfdi.Total);
+            
         }
 
         [Test]
@@ -49,7 +57,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var valorUnitario = 12.55m;
             var descripcion = "despcripción para a partida";
  
-            Assert.Throws<GenericDomainException>(() =>
+            Assert.Throws<InvalidParameterException>(() =>
             _cfdi.AgregarPartida(partidaId, cantidad, valorUnitario, descripcion));
         }
 
@@ -61,7 +69,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var valorUnitario = 0m;
             var descripcion = "despcripción para a partida";
         
-            Assert.Throws<GenericDomainException>(() =>
+            Assert.Throws<InvalidParameterException>(() =>
             _cfdi.AgregarPartida(partidaId, cantidad, valorUnitario, descripcion));
         }
 
@@ -73,7 +81,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var valorUnitario = 1m;
             var descripcion = " ";         
 
-            Assert.Throws<GenericDomainException>(() =>
+            Assert.Throws<InvalidParameterException>(() =>
             _cfdi.AgregarPartida(partidaId, cantidad, valorUnitario, descripcion));
         }
 

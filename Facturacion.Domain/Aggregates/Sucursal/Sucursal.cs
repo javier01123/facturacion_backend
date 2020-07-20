@@ -41,7 +41,7 @@ namespace Facturacion.Domain.Aggregates
         public void CambiarNombre(string nuevoNombre)
         {
             if (string.IsNullOrWhiteSpace(nuevoNombre))
-                throw new GenericDomainException("el nombre de la sucursal es obligatorio");
+                throw new InvalidParameterException("el nombre de la sucursal es obligatorio");
 
             _nombre = nuevoNombre.Trim();
         }

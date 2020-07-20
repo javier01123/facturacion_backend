@@ -35,7 +35,6 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
         public void IdsExistentes_NoDebeLanzarEx()
         {
             Assert.DoesNotThrow(() => _cfdi.EliminarPartida(_partidaId));
-
         }
     }
 }

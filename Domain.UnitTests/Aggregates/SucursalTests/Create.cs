@@ -31,7 +31,7 @@ namespace Domain.UnitTests.Aggregates.SucursalTests
             var empresaId = Guid.Empty;
             var nombre = "Sucursal prueba";
 
-            Assert.Throws<GenericDomainException>(() => Sucursal.Create(id, empresaId, nombre));
+            Assert.Throws<InvalidParameterException>(() => Sucursal.Create(id, empresaId, nombre));
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Domain.UnitTests.Aggregates.SucursalTests
             var empresaId = Guid.NewGuid();
             var nombre = "";
 
-            Assert.Throws<GenericDomainException>(() => Sucursal.Create(id, empresaId, nombre));
+            Assert.Throws<InvalidParameterException>(() => Sucursal.Create(id, empresaId, nombre));
         }
 
     }

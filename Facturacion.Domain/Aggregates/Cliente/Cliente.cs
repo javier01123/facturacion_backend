@@ -49,7 +49,7 @@ namespace Facturacion.Domain.Aggregates
         public void CambiarRazonSocial(string razonSocial)
         {
             if (string.IsNullOrWhiteSpace(razonSocial))
-                throw new GenericDomainException("la razón social es obligatoria.");
+                throw new InvalidParameterException("la razón social es obligatoria.");
 
             _razonSocial = razonSocial.Trim();
         }

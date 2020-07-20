@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Facturacion.Domain.Exceptions
 {
-    public class GenericDomainException : DomainException
+    public class InvalidParameterException : DomainException
     {
-        public GenericDomainException(string message) : base(message)
+        public InvalidParameterException(string message) : base(message)
         {
         }
     }

@@ -16,6 +16,30 @@ a trabajar con ella y con Domain Driven Design, resolver las dudas mas comunes a
 
 Este proyecto se encuentra en desarrollo
 
+
+## Onion Architecture
+Onion Architecture se basa en el principio de inversión de control. 
+Onion Architecture se compone de múltiples capas concéntricas que se interconectan entre sí hacia el núcleo que representa el dominio.
+La arquitectura no depende de la capa de datos como en las arquitecturas clásicas de varios niveles, sino de los modelos de dominio reales.
+
+![Capas en una Onion Architecture](https://raw.githubusercontent.com/javier01123/facturacion_backend/master/docs/onion_architecture.png)
+
+
+## Estrucutra de los proyectos
+
+**Facturacion.API (Presentation)**  
+En esta capa se encuentra la implementacion de la Web API y la configuración para el inicio de la aplicación.
+
+**Facturacion.Domain**
+Es la capa central de la aplicación, aquí se debe implementar toda la lógica de negocio. Debe ser ignorante de otras capas y sobre todo de la base de datos.   
+
+**Facturacion.Application**  
+En esta capa se implementan los casos de uso y las transacciones.  
+Se encarga de cordinar las llamadas a los objetos de dominio y llamadas a servicios externos a través de sus interfaces.
+
+**Facturacion.Infrastructure**
+En esta capa se deben implementar las dependencias a servicios externos como Web services, bases de datos, servicios de email, etc.,por tanto, esta capa es la que tiene depenencia a las librerias, librando a las otras capas de [complejidad accidental.](https://www.nutshell.com/blog/accidental-complexity-software-design/)
+
 ## Documentación del API utilizando Swagger
 
 Lo puedes consultar en el hosting para demostración [link](https://facturacion-backend-dev.herokuapp.com/)
@@ -25,16 +49,23 @@ Lo puedes consultar en el hosting para demostración [link](https://facturacion-
 Repositorio [Git](https://github.com/javier01123/facturacion_frontend)
 Hospedado [aquí](https://facturacion-frontend-dev.herokuapp.com/)
 
-## Onion Architecture
-Onion Architecture se basa en el principio de inversión de control. 
-Onion Architecture se compone de múltiples capas concéntricas que se interconectan entre sí hacia el núcleo que representa el dominio.
-La arquitectura no depende de la capa de datos como en las arquitecturas clásicas de varios niveles, sino de los modelos de dominio reales.
-
-![Capas en una Onion Architecture](https://raw.githubusercontent.com/javier01123/facturacion_backend/master/docs/onion_architecture.png)
-
 ## Diagrama Entidad-Relación
 
 ![EDR Diagram](https://raw.githubusercontent.com/javier01123/facturacion_backend/master/docs/FacturacionDb_EDR.png)
+
+## Testing
+
+### Pruebas unitarias (Unit Tests)
+
+* Estas pruebas automatizadas deben validar pequeñas partes de código.
+* No deben llamar servicios externos, estos deben reemplazarse con [Mocks](https://en.wikipedia.org/wiki/Mock_object)
+* Deben ser rápidas.
+
+### Pruebas de integración (Integration Tests)
+
+* Pueden llamar a servicios externos (como bases de datos)
+
+La relación de pruebas unitarias y pruebas de integración  pueden variar en cada proyecto, pero la regla general es probar la mayoria de edge cases posibles con pruebas unitarias. Probar un happy path con con la pruebas de integración y edge cases que no se puedan abarcar con pruebas unitarias.
 
 ## Recursos
 
@@ -51,3 +82,5 @@ La arquitectura no depende de la capa de datos como en las arquitecturas clásic
 * MediatR (bus de comunicación)[link](https://github.com/jbogard/MediatR)
 * Visual Studio 2019 [link](https://visualstudio.microsoft.com/es/vs/community/)
 * Docker [link](https://www.docker.com/)
+* Swagger [link](https://swagger.io/)
+* NUnit (Test Framework)[https://nunit.org/]

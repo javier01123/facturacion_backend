@@ -34,7 +34,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var serie = "f";
             var folio = 1;
 
-            Assert.Throws<GenericDomainException>(() => Cfdi.Create(id, clienteId,sucursalId, fechaEmision,serie,folio));
+            Assert.Throws<InvalidParameterException>(() => Cfdi.Create(id, clienteId,sucursalId, fechaEmision,serie,folio));
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
             var serie = "f";
             var folio = 1;
 
-            Assert.Throws<GenericDomainException>(() => Cfdi.Create(id, clienteId,sucursalId, fechaEmision,serie,folio));
+            Assert.Throws<InvalidParameterException>(() => Cfdi.Create(id, clienteId,sucursalId, fechaEmision,serie,folio));
         }
  
     }

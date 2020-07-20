@@ -34,7 +34,7 @@ namespace Domain.UnitTests.Aggregates.EmpresaTests
         public void CambiarNombre_NombreComercialVacio_DebeLanzarEx()
         {
             var nuevoNombreComercial = "";
-            Assert.Throws<GenericDomainException>(() => _empresa.ActualizarNombreComercial(nuevoNombreComercial));
+            Assert.Throws<InvalidParameterException>(() => _empresa.ActualizarNombreComercial(nuevoNombreComercial));
         }
     }
 }

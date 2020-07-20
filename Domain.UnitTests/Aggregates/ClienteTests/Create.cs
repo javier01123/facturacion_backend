@@ -33,7 +33,7 @@ namespace Domain.UnitTests.Aggregates.ClienteTests
             var rfc = "XAXX010101000";
             var razonSocial = "Cliente sa de cv";
 
-            Assert.Throws<GenericDomainException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
+            Assert.Throws<InvalidParameterException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Domain.UnitTests.Aggregates.ClienteTests
             var rfc = "XAXX010101000";
             var razonSocial = "Cliente sa de cv";
 
-            Assert.Throws<GenericDomainException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
+            Assert.Throws<InvalidParameterException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
         }
 
 
@@ -56,7 +56,7 @@ namespace Domain.UnitTests.Aggregates.ClienteTests
             var rfc = "XAXX010101000";
             var razonSocial = "";
 
-            Assert.Throws<GenericDomainException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
+            Assert.Throws<InvalidParameterException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Domain.UnitTests.Aggregates.ClienteTests
             var rfc = "XAXX010101000";
             var razonSocial = "    ";
 
-            Assert.Throws<GenericDomainException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
+            Assert.Throws<InvalidParameterException>(() => Cliente.Create(id, empresaId, rfc, razonSocial));
         }
 
     }

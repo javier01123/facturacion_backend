@@ -36,7 +36,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
         public void CambiarCliente_IdVacio_DebeLanzarEx()
         {
             var nuevoClienteId = Guid.Empty;
-            Assert.Throws<GenericDomainException>(() => _cfdi.CambiarCliente(nuevoClienteId));
+            Assert.Throws<InvalidParameterException>(() => _cfdi.CambiarCliente(nuevoClienteId));
         }
     }
 }
