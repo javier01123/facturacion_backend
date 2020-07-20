@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Facturacion.Application.UseCases.Sucursales.Queries.GetSucursal
 {
-    public class GetSucursalCommandHandler : IRequestHandler<GetSucursalCommand, SucursalDto>
+    public class GetSucursalCommandHandler : IRequestHandler<GetSucursalCommand, SucursalVm>
     {
         private ISqlConnectionFactory _sqlConnectionFactory;
 
@@ -20,7 +20,7 @@ namespace Facturacion.Application.UseCases.Sucursales.Queries.GetSucursal
             _sqlConnectionFactory = sqlConnectionFactory ?? throw new ArgumentNullException(nameof(sqlConnectionFactory));
         }
 
-        public async Task<SucursalDto> Handle(GetSucursalCommand request, CancellationToken cancellationToken)
+        public async Task<SucursalVm> Handle(GetSucursalCommand request, CancellationToken cancellationToken)
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -44,7 +44,7 @@ namespace Facturacion.Application.UseCases.Sucursales.Queries.GetSucursal
                         LIMIT 1;
                         ".ReplaceBracketsWithQuotes();
 
-            var sucursal = await connection.QuerySingleOrDefaultAsync<SucursalDto>(sql, new { Id = request.Id });
+            var sucursal = await connection.QuerySingleOrDefaultAsync<SucursalVm>(sql, new { Id = request.Id });
 
             if (sucursal == null)
                 throw new NotFoundException(nameof(sucursal), request.Id);

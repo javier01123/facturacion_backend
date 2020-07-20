@@ -9,11 +9,9 @@ namespace Facturacion.Application.UseCases.Cfdis.Queries.GetCfdiPorSucursal
 {
     public class GetCfdiPorSucursalCommandValidator : AbstractValidator<GetCfdiPorSucursalCommand>
     {
-
         public GetCfdiPorSucursalCommandValidator()
         {
             RuleFor(x => x.SucursalId).GuidNotEmpty();
         }
-
     }
 }

@@ -9,18 +9,18 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Facturacion.Application.UseCases.Empresas.GetListaEmpresas
+namespace Facturacion.Application.UseCases.Empresas.GetEmpresas
 {
-    public class GetListaEmpresasCommandHandler : IRequestHandler<GetListaEmpresasCommand, IEnumerable<EmpresaDto>>
+    public class GetEmpresasCommandHandler : IRequestHandler<GetEmpresasCommand, IEnumerable<EmpresasVm>>
     {
         private ISqlConnectionFactory _sqlConnectionFactory;
 
-        public GetListaEmpresasCommandHandler(ISqlConnectionFactory sqlConnectionFactory)
+        public GetEmpresasCommandHandler(ISqlConnectionFactory sqlConnectionFactory)
         {
             _sqlConnectionFactory = sqlConnectionFactory ?? throw new ArgumentNullException(nameof(sqlConnectionFactory));
         }
 
-        public async Task<IEnumerable<EmpresaDto>> Handle(GetListaEmpresasCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<EmpresasVm>> Handle(GetEmpresasCommand request, CancellationToken cancellationToken)
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -33,7 +33,7 @@ namespace Facturacion.Application.UseCases.Empresas.GetListaEmpresas
                         ORDER BY e.[Rfc]
                         ".ReplaceBracketsWithQuotes();
 
-            var empresas = await connection.QueryAsync<EmpresaDto>(sql);
+            var empresas = await connection.QueryAsync<EmpresasVm>(sql);
            
             return empresas;
         }

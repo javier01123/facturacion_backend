@@ -1,4 +1,5 @@
 ﻿using Facturacion.Domain.Aggregates;
+using Facturacion.Domain.Enums;
 using Facturacion.Infrastructure.Persistence.Context;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace API.IntegrationTests.Common
 
             var sucursalId = Guid.Parse("28295566-3c6b-42c4-850e-f36d5d4faaac");
             var sucursal = Sucursal.Create(sucursalId, empresaId, "Sucursal Matriz");
+            sucursal.ActualizarDomicilio("México", "Chihuahua", "Ciudad Juárez", "Juárez", "Revolución", "32000", "Flores", "1", "2");
             context.Sucursal.Add(sucursal);
 
             var clienteId = Guid.Parse("c58db24a-37cd-4a43-a9a1-e7247c79323d");
@@ -30,6 +32,7 @@ namespace API.IntegrationTests.Common
             var serie = "f";
             var folio = 1;
             var cfdi = Cfdi.Create(cfdiId, clienteId, sucursalId, fechaEmision, serie, folio);
+            cfdi.CambiarMetodoDePago(MetodoDePago.PagoEnUnaSolaExhibicion);
 
             var partidaId = Guid.Parse("74f1da12-c234-476c-a574-3a80d7648595");
             cfdi.AgregarPartida(partidaId, 1, 1, "partida de prueba");

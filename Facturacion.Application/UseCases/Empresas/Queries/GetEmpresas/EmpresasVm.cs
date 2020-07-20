@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facturacion.Application.UseCases.Empresas.GetEmpresa
+namespace Facturacion.Application.UseCases.Empresas.GetEmpresas
 {
-    public class EmpresaDto
+    public class EmpresasVm
     {
+        public Guid Id { get; set; }
         public string RazonSocial { get; set; }
         public string NombreComercial { get; set; }
         public string Rfc { get; set; }
-
     }
 }

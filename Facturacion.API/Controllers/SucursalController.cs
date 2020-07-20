@@ -18,7 +18,7 @@ namespace Facturacion.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<ActionResult<Facturacion.Application.UseCases.Sucursales.Queries.GetSucursal.SucursalDto>> GetSucursal([FromRoute] GetSucursalCommand command)
+        public async Task<ActionResult<Facturacion.Application.UseCases.Sucursales.Queries.GetSucursal.SucursalVm>> GetSucursal([FromRoute] GetSucursalCommand command)
         {
             var sucursales = await Mediator.Send(command);
             return Ok(sucursales);

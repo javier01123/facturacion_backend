@@ -18,7 +18,7 @@ namespace Facturacion.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<ActionResult<ClienteDto>> GetCliente([FromRoute] GetClienteCommand command)
+        public async Task<ActionResult<ClienteVm>> GetCliente([FromRoute] GetClienteCommand command)
         {
             var clientes = await Mediator.Send(command);
             return Ok(clientes);

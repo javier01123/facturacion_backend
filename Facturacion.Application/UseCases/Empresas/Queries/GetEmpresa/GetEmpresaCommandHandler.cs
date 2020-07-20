@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Facturacion.Application.UseCases.Empresas.GetEmpresa
 {
-    public class GetEmpresaCommandHandler : IRequestHandler<GetEmpresaCommand, EmpresaDto>
+    public class GetEmpresaCommandHandler : IRequestHandler<GetEmpresaCommand, EmpresaVm>
     {
         private ISqlConnectionFactory _sqlConnectionFactory;
 
@@ -21,7 +21,7 @@ namespace Facturacion.Application.UseCases.Empresas.GetEmpresa
             _sqlConnectionFactory = sqlConnectionFactory ?? throw new ArgumentNullException(nameof(sqlConnectionFactory));
         }
 
-        public async Task<EmpresaDto> Handle(GetEmpresaCommand request, CancellationToken cancellationToken)
+        public async Task<EmpresaVm> Handle(GetEmpresaCommand request, CancellationToken cancellationToken)
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -35,7 +35,7 @@ namespace Facturacion.Application.UseCases.Empresas.GetEmpresa
                         LIMIT 1;
                         ".ReplaceBracketsWithQuotes();
 
-            var empresaDto = await connection.QuerySingleOrDefaultAsync<EmpresaDto>(sql, new
+            var empresaDto = await connection.QuerySingleOrDefaultAsync<EmpresaVm>(sql, new
             {
                 EmpresaId = request.Id
             });

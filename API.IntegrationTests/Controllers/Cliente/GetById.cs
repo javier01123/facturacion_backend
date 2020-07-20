@@ -1,9 +1,6 @@
 ﻿using API.IntegrationTests.Common;
-using Facturacion.API;
-using Facturacion.Application.UseCases.Empresas.ActualizarDatosEmpresa;
-using Facturacion.Application.UseCases.Empresas.AltaEmpresa;
-using Facturacion.Application.UseCases.Usuarios.Queries.ValidarCredenciales;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,22 +14,20 @@ namespace API.IntegrationTests.Controllers.Cliente
 {
     [TestFixture]
     public class GetById: ControllerTestBase
-    {
-        private CustomWebApplicationFactory<Startup> _factory;
-        private HttpClient _authenticatedHttpClient;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _factory = new CustomWebApplicationFactory<Startup>();
-            _authenticatedHttpClient = _factory.GetAuthenticatedClient();
-        }
-
+    {   
         [Test]
-        public async Task GetById_IdExistente_DebeRegresarSuccess()
+        public async Task GetById_IdExistente_DebeRegresarSuccessYDatos()
         {
             var response = await _authenticatedHttpClient.GetAsync($"/api/clientes/c58db24a-37cd-4a43-a9a1-e7247c79323d");
             response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<Facturacion.Application.UseCases.Clientes.Queries.GetCliente.ClienteVm>(json);
+
+            Assert.AreEqual(result.Id, Guid.Parse("c58db24a-37cd-4a43-a9a1-e7247c79323d"));
+            Assert.AreEqual(result.Rfc, "XAXX010101000");
+            Assert.AreEqual(result.RazonSocial, "Cliente SA de CV");
+            Assert.AreEqual(result.EmpresaId, Guid.Parse("86904cc6-7838-4beb-85d8-9dad30148b11"));
         }
 
         [Test]

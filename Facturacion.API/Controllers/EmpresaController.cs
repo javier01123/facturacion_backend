@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Facturacion.Application.UseCases.Empresas.AltaEmpresa;
 using Facturacion.Application.UseCases.Empresas.ActualizarDatosEmpresa;
 using Facturacion.Application.UseCases.Empresas.GetEmpresa;
-using Facturacion.Application.UseCases.Empresas.GetListaEmpresas;
+using Facturacion.Application.UseCases.Empresas.GetEmpresas;
 using Microsoft.AspNetCore.Cors;
 using Facturacion.API.auth;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +41,7 @@ namespace Facturacion.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<ActionResult<Application.UseCases.Empresas.GetEmpresa.EmpresaDto>> Get([FromRoute] GetEmpresaCommand command)
+        public async Task<ActionResult<Application.UseCases.Empresas.GetEmpresa.EmpresaVm>> Get([FromRoute] GetEmpresaCommand command)
         {
             var empresa = await Mediator.Send(command);
             return Ok(empresa);
@@ -49,7 +49,7 @@ namespace Facturacion.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<IEnumerable<Application.UseCases.Empresas.GetListaEmpresas.EmpresaDto>>> Get([FromRoute] GetListaEmpresasCommand command)
+        public async Task<ActionResult<IEnumerable<Application.UseCases.Empresas.GetEmpresas.EmpresasVm>>> Get([FromRoute] GetEmpresasCommand command)
         {
             var empresas = await Mediator.Send(command);
             return Ok(empresas);

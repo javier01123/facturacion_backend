@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Facturacion.Application.UseCases.Sucursales.Queries.GetSucursal
 {
-   public class SucursalDto
+   public class SucursalVm
     {
+        public Guid Id { get; set; }
+        public Guid EmpresaId { get; set; }
         public string Nombre { get; set; }
         public string Pais { get; set; }
         public string Estado { get; set; }

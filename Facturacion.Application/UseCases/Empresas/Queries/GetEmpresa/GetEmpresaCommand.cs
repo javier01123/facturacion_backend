@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Facturacion.Application.UseCases.Empresas.GetEmpresa
 {
-    public class GetEmpresaCommand : IRequest<EmpresaDto>
+    public class GetEmpresaCommand : IRequest<EmpresaVm>
     {
         public Guid Id { get; set; }
     }
