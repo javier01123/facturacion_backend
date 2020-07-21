@@ -16,6 +16,9 @@ a trabajar con ella y con Domain Driven Design, resolver las dudas mas comunes a
 
 Este proyecto se encuentra en desarrollo
 
+## Documentación del API utilizando Swagger
+
+Lo puedes consultar en el hosting para demostración en [heroku](https://facturacion-backend-dev.herokuapp.com/)
 
 ## Onion Architecture
 Onion Architecture se basa en el principio de inversión de control. 
@@ -40,9 +43,7 @@ Se encarga de cordinar las llamadas a los objetos de dominio y llamadas a servic
 **Facturacion.Infrastructure**  
 En esta capa se deben implementar las dependencias a servicios externos como Web services, bases de datos, servicios de email, etc.,por tanto, esta capa es la que tiene depenencia a las librerias, librando a las otras capas de [complejidad accidental.](https://www.nutshell.com/blog/accidental-complexity-software-design/)
 
-## Documentación del API utilizando Swagger
 
-Lo puedes consultar en el hosting para demostración [link](https://facturacion-backend-dev.herokuapp.com/)
 
 ## Front-end implementado con React Js
 
