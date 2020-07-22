@@ -28,6 +28,12 @@ La arquitectura no depende de la capa de datos como en las arquitecturas clásic
 ![Capas en una Onion Architecture](https://raw.githubusercontent.com/javier01123/facturacion_backend/master/docs/onion_architecture.png)
 
 
+## Front-end implementado con React Js
+
+Repositorio [Git](https://github.com/javier01123/facturacion_frontend)
+Hospedado [aquí](https://facturacion-frontend-dev.herokuapp.com/)
+
+
 ## Estrucutra de los proyectos
 
 **Facturacion.API (Presentation)**  
@@ -43,12 +49,6 @@ Se encarga de cordinar las llamadas a los objetos de dominio y llamadas a servic
 **Facturacion.Infrastructure**  
 En esta capa se deben implementar las dependencias a servicios externos como Web services, bases de datos, servicios de email, etc.,por tanto, esta capa es la que tiene depenencia a las librerias, librando a las otras capas de [complejidad accidental.](https://www.nutshell.com/blog/accidental-complexity-software-design/)
 
-
-
-## Front-end implementado con React Js
-
-Repositorio [Git](https://github.com/javier01123/facturacion_frontend)
-Hospedado [aquí](https://facturacion-frontend-dev.herokuapp.com/)
 
 ## Diagrama Entidad-Relación
 
