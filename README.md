@@ -71,6 +71,21 @@ Hospedado [aquí](https://facturacion-frontend-dev.herokuapp.com/)
 
 La relación de pruebas unitarias y pruebas de integración  pueden variar en cada proyecto, pero la regla general es probar la mayoria de edge cases posibles con pruebas unitarias. Probar un happy path con con la pruebas de integración y edge cases que no se puedan abarcar con pruebas unitarias.
 
+## Github Actions
+
+El repositorio utiliza Gihub Actions para ejecutar las pruebas cada vez que se sube un commit al repositorio, si las pruebas pasan entonces se hace el deploy automáticamente a heroku.
+
+El archivo del workflow es [este](https://raw.githubusercontent.com/javier01123/facturacion_backend/master/.github/workflows/test_and_deploy.yml)
+
+Para la autenticación en heroku a traves de consola se debe obtener el token [aquí](https://devcenter.heroku.com/articles/authentication) y crear el SECRET en github.
+
+
+## Autenticación
+
+El API utiliza una cookie HTTP Only para la autenticación de los usuarios. Este tipo de cookies no se pueden manipuar con javascript, lo que la hace mas seguro, el navegador y cliente http se encargan de almacenarla.  
+
+En las pruebas de integración por eso debe llamarse primero a la API para autenticarse y despues utilizar ese misma instancia del cliente para realizar los requests.
+
 ## Recursos
 
 * Introducción Domain Driven Design [link](https://martinfowler.com/bliki/DomainDrivenDesign.html)
