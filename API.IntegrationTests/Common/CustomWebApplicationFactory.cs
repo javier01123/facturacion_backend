@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 
 namespace API.IntegrationTests.Common
@@ -84,6 +85,7 @@ namespace API.IntegrationTests.Common
         internal HttpClient GetAuthenticatedClient()
         {
             var client = GetAnonymousClient();
+
             var command = new ValidarCredencialesCommand()
             {
                 Email = "admin@noserver.com",
@@ -91,9 +93,9 @@ namespace API.IntegrationTests.Common
             };
             var content = Utilities.GetRequestContent(command);
             var task = client.PostAsync($"/api/usuarios/authenticate", content);
-            task.Wait();
             var response = task.Result;
             response.EnsureSuccessStatusCode();
+         
             return client;
         }
 

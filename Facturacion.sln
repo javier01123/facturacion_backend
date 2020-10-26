@@ -25,7 +25,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{331B8E36-F
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrasctructure.UnitTests", "Infrasctructure.UnitTests\Infrasctructure.UnitTests.csproj", "{CED7F679-DD78-494B-A6BC-B5D06C6BA2F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrasctructure.UnitTests", "Infrasctructure.UnitTests\Infrasctructure.UnitTests.csproj", "{CED7F679-DD78-494B-A6BC-B5D06C6BA2F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D89B21F0-B39D-49E3-95FB-6A3E2312019E}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\test_and_deploy.yml = .github\workflows\test_and_deploy.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

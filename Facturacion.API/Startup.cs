@@ -55,7 +55,7 @@ namespace Facturacion.API
             services.AddControllers();
             services.AddMvc()
             .AddHybridModelBinder();
-    
+
             services.AddSwaggerGen(options =>
             {
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -108,7 +108,9 @@ namespace Facturacion.API
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
-            .WithOrigins(origin));
+            .WithOrigins(origin, "10.0.0.21", "10.0.0.21:5000"));
+
+            //.WithOrigins(origin));
 
             app.UseCustomExceptionHandler();
             app.UseRouting();
