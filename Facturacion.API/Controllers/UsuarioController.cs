@@ -37,7 +37,8 @@ namespace Facturacion.API.Controllers
             {
                 Expires = DateTimeOffset.Now.AddDays(1),
                 HttpOnly = true,
-                SameSite = SameSiteMode.None
+                SameSite = SameSiteMode.None,
+                Secure = true
             };
 
             Response.Cookies.Append("jwt_token", token, cookieOptions);
