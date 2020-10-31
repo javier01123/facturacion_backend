@@ -9,10 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace API.IntegrationTests.Common
 {
@@ -75,16 +78,16 @@ namespace API.IntegrationTests.Common
 
                 })
                 .UseEnvironment("Test");
+                //.UseSetting("https_port", "44362");
         }
 
         public HttpClient GetAnonymousClient()
         {
             return CreateClient();
         }
-
-        internal HttpClient GetAuthenticatedClient()
+        internal async Task<HttpClient> GetAuthenticatedClient()
         {
-            var client = GetAnonymousClient();
+            var client = GetAnonymousClient();     
 
             var command = new ValidarCredencialesCommand()
             {
@@ -92,10 +95,11 @@ namespace API.IntegrationTests.Common
                 Password = "mypass"
             };
             var content = Utilities.GetRequestContent(command);
-            var task = client.PostAsync($"/api/usuarios/authenticate", content);
-            var response = task.Result;
+            var response = await client.PostAsync($"/api/usuarios/authenticate", content);
+            var  result = JsonConvert.DeserializeObject<AuthResponse>( await response.Content.ReadAsStringAsync());
             response.EnsureSuccessStatusCode();
-         
+            client.DefaultRequestHeaders.Authorization =new AuthenticationHeaderValue("Bearer", result.token);
+
             return client;
         }
 

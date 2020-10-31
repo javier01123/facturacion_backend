@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace API.IntegrationTests.Common
 {
@@ -13,10 +14,10 @@ namespace API.IntegrationTests.Common
         protected HttpClient _authenticatedHttpClient;
 
         [SetUp]
-        public virtual void SetUp()
+        public async virtual Task SetUp()
         {
             _factory = new CustomWebApplicationFactory<Startup>();
-            _authenticatedHttpClient = _factory.GetAuthenticatedClient();
+            _authenticatedHttpClient = await _factory.GetAuthenticatedClient();
         }
 
     }

@@ -21,10 +21,10 @@ namespace API.IntegrationTests.Controllers.Cfdi
         private HttpClient _authenticatedHttpClient;
 
         [SetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             _factory = new CustomWebApplicationFactory<Startup>();
-            _authenticatedHttpClient = _factory.GetAuthenticatedClient();
+            _authenticatedHttpClient = await _factory.GetAuthenticatedClient();
         }
 
         [Test]

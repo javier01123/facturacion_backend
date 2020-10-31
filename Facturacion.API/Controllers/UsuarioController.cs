@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 
 namespace Facturacion.API.Controllers
@@ -28,21 +29,9 @@ namespace Facturacion.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> Authenticate([FromBody] ValidarCredencialesCommand command)
         {
-
             ValidarCredencialesResult resultado = await Mediator.Send(command);
-
-            string token = JwtManager.GenerateToken(command.Email.Trim());
-
-            var cookieOptions = new CookieOptions()
-            {
-                Expires = DateTimeOffset.Now.AddDays(1),
-                HttpOnly = true,
-                SameSite = SameSiteMode.None,
-                Secure = true
-            };
-
-            Response.Cookies.Append("jwt_token", token, cookieOptions);
-            return Ok(resultado);
+            string token = JwtManager.GenerateToken(command.Email.Trim());            
+            return Ok(new { user =new { id = resultado.UsuarioId, email = resultado.Email }, token = token });
         }
 
 
