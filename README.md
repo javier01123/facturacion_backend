@@ -88,17 +88,17 @@ En las pruebas de integración por eso debe llamarse primero a la API para auten
 
 ## Lista de pendientes
 
-* Implementar un Unit Of Work para simplificar la inyeccion de los repositorios
+* Implementar un Unit Of Work que incluya los repositorios para simplificar la inyeccion.
 * Crear pruebas unitarias a nivel de caso de uso para simplificar y disminuir el coupling entre los unit test y la implementación del modelo.
 * Agregar ejemplos para manejo de eventos internos
-
+* Agregar ejemplos del uso de Fakes. Documentar diferencias Mocks vs Fakes.
 
 ## Recursos
 
 * Introducción Domain Driven Design [link](https://martinfowler.com/bliki/DomainDrivenDesign.html)
 * Domain driven design de Scott Millet [link](https://www.oreilly.com/library/view/patterns-principles-and/9781118714706/)
 * Clean Architecture [link](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-* Implementación en python, un libro muy útil incluso para otros lenguajes. También planeo una implementación en este lenguaje [link](https://www.oreilly.com/library/view/architecture-patterns-with/9781492052197/)
+* Architecture Patterns with Python, un libro muy útil incluso para otros lenguajes. También planeo una implementación en este lenguaje [link](https://www.oreilly.com/library/view/architecture-patterns-with/9781492052197/)
 * CQRS [link](https://martinfowler.com/bliki/CQRS.html)
 * Hashing [link](https://docs.microsoft.com/en-us/dotnet/api/system.string.compareto?view=netcore-3.1)
 
