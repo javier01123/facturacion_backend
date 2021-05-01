@@ -29,20 +29,16 @@ namespace Facturacion.Application.UseCases.Empresas.ActualizarDatosEmpresa
 
         public async Task<Unit> Handle(ActualizarDatosEmpresaCommand request, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (_unitOfWork.StartTransaction())
             {
                 var empresa = await _empresaRepository.FindById(request.Id);
-
                 if (empresa == null)
                     throw new NotFoundException(nameof(Empresa), request.Id);
-
                 empresa.ActualizarRazonSocial(request.RazonSocial);
                 empresa.ActualizarNombreComercial(request.NombreComercial);
                 _empresaRepository.UpdateEmpresa(empresa);
-
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-                transactionScope.Complete();
+                _unitOfWork.Commit();
             }
 
             return Unit.Value;

@@ -25,14 +25,13 @@ namespace Facturacion.Application.UseCases.Clientes.Commands.ActualizarDatosClie
 
         public async Task<Unit> Handle(ActualizarDatosClienteCommand request, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (_unitOfWork.StartTransaction())
             {
                 var cliente = await _clienteRepository.FindById(request.Id);
                 cliente.CambiarRazonSocial(request.RazonSocial);
                 _clienteRepository.UpdateCliente(cliente);
-
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
-                transactionScope.Complete();
+                _unitOfWork.Commit();
             }
             return Unit.Value;
         }

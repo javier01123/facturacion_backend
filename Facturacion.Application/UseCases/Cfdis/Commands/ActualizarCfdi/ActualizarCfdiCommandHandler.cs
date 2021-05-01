@@ -21,7 +21,7 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.ActualizarCfdi
         }
         public async Task<Unit> Handle(ActualizarCfdiCommand request, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (_unitOfWork.StartTransaction())
             {
                 var cfdi = await _cfdiRepository.GetById(request.Id);
 
@@ -31,8 +31,7 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.ActualizarCfdi
                 cfdi.CambiarCliente(request.ClienteId);
                 cfdi.CambiarFechaEmision(request.FechaEmision);
                 cfdi.CambiarMetodoDePago(request.MetodoDePago);
-                cfdi.AsignarTasaIva(request.TasaIva);
-            
+                cfdi.AsignarTasaIva(request.TasaIva);            
                 cfdi.EliminarPartidas();
 
                 if (request.Partidas != null)
@@ -41,7 +40,7 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.ActualizarCfdi
 
                 _cfdiRepository.UpdateCfdi(cfdi);
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
-                transactionScope.Complete();
+                _unitOfWork.Commit();
             }
 
             return Unit.Value;

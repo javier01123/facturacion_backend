@@ -19,6 +19,7 @@ namespace Facturacion.Application.UseCases.Empresas.AltaEmpresa
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmpresaRepository _empresaRepository;
         private readonly ISucursalRepository _sucursalRepository;
+        private AltaEmpresaCommand _request;
 
         public AltaEmpresaCommandHandler(IUnitOfWork unitOfWork, IEmpresaRepository empresaRepository, ISucursalRepository sucursalRepository)
         {
@@ -29,25 +30,27 @@ namespace Facturacion.Application.UseCases.Empresas.AltaEmpresa
 
         public async Task<Unit> Handle(AltaEmpresaCommand request, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            _request = request;
+
+            using (_unitOfWork.StartTransaction())
             {
-                var rfcVo = Rfc.For(request.Rfc);
-                var empresaExistente = await _empresaRepository.FindByRfc(rfcVo);
-
-                if (empresaExistente != null)
-                    throw new RfcEmpresaDuplicadoException(request.Rfc);
-
-                var empresa = Empresa.Create(request.Id, request.Rfc, request.RazonSocial, request.NombreComercial);
+                var rfcVo = Rfc.For(_request.Rfc);
+                await VerifyRfcNotDuplicated(rfcVo);
+                var empresa = Empresa.Create(_request.Id, _request.Rfc, _request.RazonSocial, _request.NombreComercial);
                 var sucursal = Sucursal.Create(Guid.NewGuid(), empresa.Id, "Matriz");
                 _empresaRepository.AddEmpresa(empresa);
                 _sucursalRepository.AddSucursal(sucursal);
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-                transactionScope.Complete();
+                _unitOfWork.Commit();
             }
-
             return Unit.Value;
         }
 
+        private async Task VerifyRfcNotDuplicated(Rfc rfcVo)
+        {
+            var empresaExistente = await _empresaRepository.FindByRfc(rfcVo);
+            if (empresaExistente != null)
+                throw new RfcEmpresaDuplicadoException(_request.Rfc);
+        }
     }
 }

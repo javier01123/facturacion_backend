@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Facturacion.Infrastructure.Persistence.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly FacturacionContext _context;
+        private TransactionScope _transaction;
 
         public UnitOfWork(FacturacionContext context)
         {
@@ -20,6 +22,17 @@ namespace Facturacion.Infrastructure.Persistence.UnitOfWork
         public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public TransactionScope StartTransaction()
+        {
+            _transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            return _transaction;
+        }
+
+        public void Commit()
+        {            
+            _transaction.Complete();
         }
     }
 }

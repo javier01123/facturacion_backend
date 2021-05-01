@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Facturacion.Application\Facturacion.Application.csproj" />
+    <ProjectReference Include="..\TestsCommon\TestsCommon.csproj" />
   </ItemGroup>
 
 </Project>

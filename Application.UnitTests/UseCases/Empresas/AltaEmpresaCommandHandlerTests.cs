@@ -10,6 +10,7 @@ using NUnit.Framework;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TestsCommon.Fakes;
 
 namespace Application.UnitTests.UseCases.Empresas
 {
@@ -18,7 +19,7 @@ namespace Application.UnitTests.UseCases.Empresas
     {
 
         [Test]
-        public async Task Handle_ValidRequest_DebeSerExitoso()
+        public async Task test_alta_empresa_valida()
         {
             var unitOfWork = Substitute.For<IUnitOfWork>();
             var empresaRepository = Substitute.For<IEmpresaRepository>();
@@ -43,7 +44,7 @@ namespace Application.UnitTests.UseCases.Empresas
         //RfcEmpresaDuplicadoException
 
         [Test]
-        public void Handle_RfcExistente_DebeLanzarRfcEmpresaDuplicadoEx()
+        public void test_alta_con_rfc_duplicado()
         {
             var empresa = Empresa.Create(Guid.NewGuid(), "XAXX010101000", "razonSocial", "nombreComercial");
             var unitOfWork = Substitute.For<IUnitOfWork>();

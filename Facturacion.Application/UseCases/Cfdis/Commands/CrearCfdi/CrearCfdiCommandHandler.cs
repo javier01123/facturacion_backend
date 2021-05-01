@@ -27,7 +27,7 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.CrearCfdi
 
         public async Task<Unit> Handle(CrearCfdiCommand request, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (_unitOfWork.StartTransaction())
             {
                 int folio = await _sucursalRepository.GetSiguienteFolioDisponible(request.SucursalId);
 
@@ -50,7 +50,7 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.CrearCfdi
 
                 await _cfdiRepository.AddCfdi(cfdi);
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
-                transactionScope.Complete();
+                _unitOfWork.Commit();
             }
 
             return Unit.Value;

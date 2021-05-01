@@ -26,7 +26,7 @@ namespace Facturacion.Application.UseCases.Sucursales.ActualizarDatosSucursal
 
         public async Task<Unit> Handle(ActualizarDatosSucursalCommand request, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (_unitOfWork.StartTransaction())
             {
                 var sucursal = await _sucursalRepository.FindById(request.Id);
                 sucursal.CambiarNombre(request.Nombre);
@@ -44,14 +44,9 @@ namespace Facturacion.Application.UseCases.Sucursales.ActualizarDatosSucursal
                 );
 
                 _sucursalRepository.UpdateSucursal(sucursal);
-
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-
-                transactionScope.Complete();
+                _unitOfWork.Commit();
             }
-
-
             return Unit.Value;
         }
 
