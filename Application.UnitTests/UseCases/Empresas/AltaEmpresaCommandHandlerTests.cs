@@ -10,7 +10,6 @@ using NUnit.Framework;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TestsCommon.Fakes;
 
 namespace Application.UnitTests.UseCases.Empresas
 {
@@ -21,10 +20,8 @@ namespace Application.UnitTests.UseCases.Empresas
         [Test]
         public async Task test_alta_empresa_valida()
         {
-            var unitOfWork = Substitute.For<IUnitOfWork>();
-            var empresaRepository = Substitute.For<IEmpresaRepository>();
-            var sucursalRepository = Substitute.For<ISucursalRepository>();
-            var handler = new AltaEmpresaCommandHandler(unitOfWork, empresaRepository, sucursalRepository);
+             
+            var handler = new AltaEmpresaCommandHandler();
 
             var request = new AltaEmpresaCommand()
             {
@@ -36,22 +33,15 @@ namespace Application.UnitTests.UseCases.Empresas
 
             var result = await handler.Handle(request, CancellationToken.None);
 
-            Assert.AreEqual(result, Unit.Value);
-            empresaRepository.Received().AddEmpresa(Arg.Any<Empresa>());
-            sucursalRepository.Received().AddSucursal(Arg.Any<Sucursal>());
-            Received.InOrder(async () => await unitOfWork.SaveChangesAsync(Arg.Any<CancellationToken>()));
+            Assert.AreEqual(result, Unit.Value);            
         }
         //RfcEmpresaDuplicadoException
 
         [Test]
         public void test_alta_con_rfc_duplicado()
         {
-            var empresa = Empresa.Create(Guid.NewGuid(), "XAXX010101000", "razonSocial", "nombreComercial");
-            var unitOfWork = Substitute.For<IUnitOfWork>();
-            var empresaRepository = Substitute.For<IEmpresaRepository>();
-            empresaRepository.FindByRfc(Arg.Any<Rfc>()).Returns(empresa);
-            var sucursalRepository = Substitute.For<ISucursalRepository>();
-            var handler = new AltaEmpresaCommandHandler(unitOfWork, empresaRepository, sucursalRepository);
+            var empresa = Empresa.Create(Guid.NewGuid(), "XAXX010101000", "razonSocial", "nombreComercial");              
+            var handler = new AltaEmpresaCommandHandler();
 
             var request = new AltaEmpresaCommand()
             {
@@ -61,9 +51,7 @@ namespace Application.UnitTests.UseCases.Empresas
                 NombreComercial = "nombre comercial x"
             };
 
-            Assert.ThrowsAsync<RfcEmpresaDuplicadoException>(async () => await handler.Handle(request, CancellationToken.None));
-            empresaRepository.DidNotReceive().AddEmpresa(Arg.Any<Empresa>());
-            sucursalRepository.DidNotReceive().AddSucursal(Arg.Any<Sucursal>());
+            Assert.ThrowsAsync<RfcEmpresaDuplicadoException>(async () => await handler.Handle(request, CancellationToken.None)); 
         }
 
     }

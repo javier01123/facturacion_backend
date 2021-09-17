@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Facturacion.Application\Facturacion.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fakes\" />
+  </ItemGroup>
+
 </Project>
