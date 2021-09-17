@@ -1,6 +1,7 @@
 ﻿
 using Facturacion.Application.Common.Contracts;
 using Facturacion.Application.Common.Contracts.Repositories;
+using Facturacion.Application.Persistence.Context;
 using Facturacion.Domain.Aggregates;
 using MediatR;
 using System;
@@ -13,20 +14,18 @@ namespace Facturacion.Application.UseCases.Clientes.Commands.CrearCliente
 {
     public class CrearClienteCommandHandler : IRequestHandler<CrearClienteCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IClienteRepository _clienteRepository;
+        private readonly FacturacionContext _context;
 
-        public CrearClienteCommandHandler(IUnitOfWork unitOfWork, IClienteRepository clienteRepository)
+        public CrearClienteCommandHandler(FacturacionContext context)
         {
-            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-            _clienteRepository = clienteRepository ?? throw new ArgumentNullException(nameof(clienteRepository));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<Unit> Handle(CrearClienteCommand request, CancellationToken cancellationToken)
         {
             var cliente = Cliente.Create(request.Id, request.EmpresaId, request.Rfc, request.RazonSocial);
-            _clienteRepository.AddCliente(cliente);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            _context.Add(cliente);
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }

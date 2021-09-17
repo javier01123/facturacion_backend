@@ -7,16 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Facturacion.Infrastructure.Persistence.Context
+namespace Facturacion.Application.Common.Context.Extensions
 {
-    public static class FacturacionDbContextExtensions
+    public static class EmpresaExtensions
     {
         public async static Task<Empresa> FindByRfcAsync(this DbSet<Empresa> empresas, Rfc rfc)
         {
-            //return await empresas.Where(m => m.Rfc.Value == rfc).FirstOrDefaultAsync();
             return await empresas.Where(m => m.Rfc == rfc).FirstOrDefaultAsync();
+        }
 
-
+        public static async Task<bool> IsRfcTaken(this DbSet<Empresa> empresas, Rfc rfcVo)
+        {
+            return await empresas.Where(e => e.Rfc == rfcVo).AnyAsync();            
         }
     }
 }

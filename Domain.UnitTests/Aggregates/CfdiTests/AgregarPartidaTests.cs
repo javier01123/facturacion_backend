@@ -9,7 +9,7 @@ using System.Text;
 namespace Domain.UnitTests.Aggregates.CfdiTests
 {
     [TestFixture]
-    public class AgregarPartida
+    public class AgregarPartidaTests
     {
         private Cfdi _cfdi;
 
@@ -26,7 +26,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
         }
 
         [Test]
-        public void AgregarPartida_DatosValidos_DebeGenerarCalculosEsperados()
+        public void agregar_partida_debe_calcular_totales()
         {
             var partidaId = Guid.NewGuid();
             var cantidad = 23.66m;
@@ -50,7 +50,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
         }
 
         [Test]
-        public void AgregarPartida_CantidadEnCero_DebeLanzarEx()
+        public void partida_con_cantidad_cero_debe_lanzar_excepcion()
         {
             var partidaId = Guid.NewGuid();
             var cantidad = 0m;
@@ -62,7 +62,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
         }
 
         [Test]
-        public void AgregarPartida_ValorUnitarioCero_DebeLanzarEx()
+        public void agregar_valor_unitario_cero_debe_lanzar_excepcion()
         {
             var partidaId = Guid.NewGuid();
             var cantidad = 1m;
@@ -74,7 +74,7 @@ namespace Domain.UnitTests.Aggregates.CfdiTests
         }
 
         [Test]
-        public void AgregarPartida_DescripcionVacia_DebeLanzarEx()
+        public void agregar_partida_sin_descripcion_debe_lanzar_excepcion()
         {
             var partidaId = Guid.NewGuid();
             var cantidad = 1m;

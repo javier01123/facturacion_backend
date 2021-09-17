@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facturacion.Infrastructure.Persistence.ValueConverters
+namespace Facturacion.Application.Persistence.ValueConverters
 {
     public class RfcValueConverter:ValueConverter<Rfc, string>
     {

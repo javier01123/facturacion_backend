@@ -22,6 +22,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication;
 using Facturacion.API.Config;
 using Facturacion.API.Middleware;
+using Facturacion.Application.Persistence.Context;
 
 namespace Facturacion.API
 {

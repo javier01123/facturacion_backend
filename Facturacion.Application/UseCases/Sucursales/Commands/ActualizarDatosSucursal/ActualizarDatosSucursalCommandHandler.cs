@@ -1,6 +1,7 @@
 ﻿
 using Facturacion.Application.Common.Contracts;
 using Facturacion.Application.Common.Contracts.Repositories;
+using Facturacion.Application.Persistence.Context;
 using Facturacion.Domain.Aggregates;
 using MediatR;
 using System;
@@ -15,38 +16,31 @@ namespace Facturacion.Application.UseCases.Sucursales.ActualizarDatosSucursal
 
     public class ActualizarDatosSucursalCommandHandler : IRequestHandler<ActualizarDatosSucursalCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISucursalRepository _sucursalRepository;
+        private readonly FacturacionContext _context;
 
-        public ActualizarDatosSucursalCommandHandler(IUnitOfWork unitOfWork, ISucursalRepository sucursalRepository)
+        public ActualizarDatosSucursalCommandHandler(FacturacionContext context)
         {
-            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-            _sucursalRepository = sucursalRepository ?? throw new ArgumentNullException(nameof(sucursalRepository));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<Unit> Handle(ActualizarDatosSucursalCommand request, CancellationToken cancellationToken)
         {
-            using (_unitOfWork.StartTransaction())
-            {
-                var sucursal = await _sucursalRepository.FindById(request.Id);
-                sucursal.CambiarNombre(request.Nombre);
+            var sucursal = await _context.Sucursal.FindAsync(request.Id);
 
-                sucursal.ActualizarDomicilio(
-                request.Pais,
-                request.Estado,
-                request.Ciudad,
-                request.Municipio,
-                request.Colonia,
-                request.CodigoPostal,
-                request.Calle,
-                request.NumeroInterior,
-                request.NumeroExterior
-                );
+            sucursal.CambiarNombre(request.Nombre);
+            sucursal.ActualizarDomicilio(
+            request.Pais,
+            request.Estado,
+            request.Ciudad,
+            request.Municipio,
+            request.Colonia,
+            request.CodigoPostal,
+            request.Calle,
+            request.NumeroInterior,
+            request.NumeroExterior
+            );
 
-                _sucursalRepository.UpdateSucursal(sucursal);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
-                _unitOfWork.Commit();
-            }
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
 

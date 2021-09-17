@@ -22,6 +22,7 @@
       "launchBrowser": true,
       "launchUrl": "api/empresa",
       "environmentVariables": {
+        "DATABASE_URL": "postgres://rhbyidhfkvhrkg:5ddda5fc6b378e2d6351059279fcb1f847606792a020869a640558d4ec23b4db@ec2-52-0-155-79.compute-1.amazonaws.com:5432/d9tb4rs7us5pm0",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5000"
@@ -30,7 +31,6 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
-      //"launchUrl": "{Scheme}://{ServiceHost}:5000/weatherforecast",
       "publishAllPorts": true,
       "httpPort": 5000
     }

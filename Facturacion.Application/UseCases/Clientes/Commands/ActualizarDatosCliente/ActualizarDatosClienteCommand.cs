@@ -8,7 +8,6 @@ namespace Facturacion.Application.UseCases.Clientes.Commands.ActualizarDatosClie
     public class ActualizarDatosClienteCommand : IRequest
     {
         public Guid Id { get; set; }
-
         public string RazonSocial { get; set; }
 
     }

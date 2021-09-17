@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facturacion.Infrastructure.Persistence.EntitiesConfiguration
+namespace Facturacion.Application.Persistence.EntitiesConfiguration
 {
     class EmpresaConfig : IEntityTypeConfiguration<Empresa>
     {

@@ -16,4 +16,14 @@ namespace Facturacion.Application.UseCases.Cfdis.Commands.ActualizarCfdi
 
         public PartidaVm[] Partidas { get; set; }
     }
+
+    public class PartidaVm
+    {
+        public Guid Id { get; set; }
+        public decimal Cantidad { get; set; }
+        public decimal ValorUnitario { get; set; }
+        public decimal Importe { get; set; }
+        public string Descripcion { get; set; }
+    }
+
 }

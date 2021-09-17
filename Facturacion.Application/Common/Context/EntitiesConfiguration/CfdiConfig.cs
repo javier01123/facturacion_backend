@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
-namespace Facturacion.Infrastructure.Persistence.EntitiesConfiguration
+namespace Facturacion.Application.Persistence.EntitiesConfiguration
 {
     class CfdiConfig : IEntityTypeConfiguration<Cfdi>
     {

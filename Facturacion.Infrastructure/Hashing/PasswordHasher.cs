@@ -7,7 +7,6 @@ namespace Facturacion.Infrastructure.Hashing
 {
     public class PasswordHasher : IPasswordHasher
     {
-
         public string GenerateSalt()
         {
             byte[] salt = new byte[128 / 8];

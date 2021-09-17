@@ -1,5 +1,6 @@
 ﻿
 using Facturacion.Application.Common.Contracts;
+using Facturacion.Application.Persistence.Context;
 using Facturacion.Application.UseCases.Usuarios.Queries.ValidarCredenciales;
 using Facturacion.Infrastructure.DataAccess;
 using Facturacion.Infrastructure.Persistence.Context;

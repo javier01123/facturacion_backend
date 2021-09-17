@@ -1,6 +1,5 @@
 ﻿
 using Facturacion.Domain.Aggregates;
-using Facturacion.Domain.Aggregates;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
@@ -12,11 +11,10 @@ using System.Linq;
 using System.Text;
 
 
-namespace Facturacion.Infrastructure.Persistence.Context
+namespace Facturacion.Application.Persistence.Context
 {
     public class FacturacionContext : DbContext
-    {
-
+    { 
         public FacturacionContext(DbContextOptions<FacturacionContext> options) : base(options)
         {
  

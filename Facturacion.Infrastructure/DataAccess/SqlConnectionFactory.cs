@@ -1,10 +1,7 @@
 ﻿using Facturacion.Application.Common.Contracts;
-using Microsoft.Data.SqlClient;
 using Npgsql;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace Facturacion.Infrastructure.DataAccess
 {

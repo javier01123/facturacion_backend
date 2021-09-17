@@ -1,6 +1,7 @@
 ﻿
 using Facturacion.Application.Common.Contracts;
 using Facturacion.Application.Common.Contracts.Repositories;
+using Facturacion.Application.Persistence.Context;
 using Facturacion.Domain.Aggregates;
 using Facturacion.Domain.ValueObjects;
 using MediatR;
@@ -14,20 +15,18 @@ namespace Facturacion.Application.UseCases.Empresas.AltaEmpresa
 {
     public class RegistrarNuevaSucursalCommandHandler : IRequestHandler<RegistrarNuevaSucursalCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISucursalRepository _sucursalRepository;
+        private readonly FacturacionContext _context;
 
-        public RegistrarNuevaSucursalCommandHandler(IUnitOfWork unitOfWork, ISucursalRepository sucursalRepository)
+        public RegistrarNuevaSucursalCommandHandler(FacturacionContext context)
         {
-            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-            _sucursalRepository = sucursalRepository ?? throw new ArgumentNullException(nameof(sucursalRepository));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<Unit> Handle(RegistrarNuevaSucursalCommand request, CancellationToken cancellationToken)
         {
             var sucursal = Sucursal.Create(request.Id, request.EmpresaId, request.Nombre);
-            _sucursalRepository.AddSucursal(sucursal);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            _context.Add(sucursal);
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
 

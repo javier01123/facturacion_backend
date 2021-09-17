@@ -21,6 +21,7 @@ namespace Facturacion.API
         private string GetConnectionFromConfig()
         {
             return _configuration.GetConnectionString("FacturacionDb");
+            //return GetConnectionFromHeroku();
         }
 
         private string GetConnectionFromHeroku()

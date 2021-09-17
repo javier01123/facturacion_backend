@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Npgsql;
+using Npgsql.NameTranslation;
 using System;
 using System.Collections.Generic;
 using System.Text;

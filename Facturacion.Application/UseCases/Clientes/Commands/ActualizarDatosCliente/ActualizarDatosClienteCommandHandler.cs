@@ -1,6 +1,7 @@
 ﻿
 using Facturacion.Application.Common.Contracts;
 using Facturacion.Application.Common.Contracts.Repositories;
+using Facturacion.Application.Persistence.Context;
 using Facturacion.Domain.Aggregates;
 using MediatR;
 using System;
@@ -14,25 +15,18 @@ namespace Facturacion.Application.UseCases.Clientes.Commands.ActualizarDatosClie
 {
     public class ActualizarDatosClienteCommandHandler : IRequestHandler<ActualizarDatosClienteCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IClienteRepository _clienteRepository;
+        private readonly FacturacionContext _context;
 
-        public ActualizarDatosClienteCommandHandler(IUnitOfWork unitOfWork, IClienteRepository clienteRepository)
+        public ActualizarDatosClienteCommandHandler(FacturacionContext context)
         {
-            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-            _clienteRepository = clienteRepository ?? throw new ArgumentNullException(nameof(clienteRepository));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<Unit> Handle(ActualizarDatosClienteCommand request, CancellationToken cancellationToken)
         {
-            using (_unitOfWork.StartTransaction())
-            {
-                var cliente = await _clienteRepository.FindById(request.Id);
-                cliente.CambiarRazonSocial(request.RazonSocial);
-                _clienteRepository.UpdateCliente(cliente);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
-                _unitOfWork.Commit();
-            }
+            var cliente = await _context.Cliente.FindAsync(request.Id);
+            cliente.CambiarRazonSocial(request.RazonSocial);
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }
