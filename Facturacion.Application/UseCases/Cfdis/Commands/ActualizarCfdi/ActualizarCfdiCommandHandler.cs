@@ -1,6 +1,4 @@
-﻿using Facturacion.Application.Common.Contracts;
-using Facturacion.Application.Common.Contracts.Repositories;
-using Facturacion.Application.Common.Exceptions;
+﻿using Facturacion.Application.Common.Exceptions;
 using Facturacion.Application.Persistence.Context;
 using Facturacion.Domain.Aggregates;
 using MediatR;

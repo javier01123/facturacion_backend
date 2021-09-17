@@ -19,8 +19,7 @@ namespace Application.UnitTests.UseCases.Empresas
 
         [Test]
         public async Task test_alta_empresa_valida()
-        {
-             
+        {             
             var handler = new AltaEmpresaCommandHandler();
 
             var request = new AltaEmpresaCommand()
